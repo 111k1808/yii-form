@@ -10,6 +10,7 @@ body {
 .header {
   min-height: 100%;
   background-color: #175A84;
+  box-sizing: border-box;
 }
 
 
@@ -40,7 +41,7 @@ body {
   font-family: 'Rowdies', cursive;
   font-size: 32px;
   color: lawngreen;
-  border: none;
+  border-color: transparent;
   background-color: transparent;
 }
 
@@ -58,8 +59,23 @@ main {
   flex-grow: 1;
 }
 
+.main-title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.avatar {
+  border: 5px solid red;
+}
+
+.form-btn {
+  text-align: center;
+  margin: 50px 0;
+  border-radius: 15px;
+}
+
 .footer{
-  
+  min-height: 120px;
   background-color: #43474A;
   color: aliceblue;
   outline: 2px solid yellow;
