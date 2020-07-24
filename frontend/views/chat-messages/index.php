@@ -7,7 +7,6 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ChatMessagesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
 /* @var $model app\models\ChatMessages */
 
 $this->title = 'Feedback form';
@@ -20,6 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-md-6">
               <?php $form = ActiveForm::begin(); ?>
 
+              <?= $form->field($searchModel, 'user_id',['template' => '{input}',
+                                                                  'inputOptions' =>
+                                                                    ['value'=>1]])->hiddenInput(); ?>
               <?= $form->field($searchModel, 'comment')->textarea(['id' => 4,
                                                                              'rows' => 5,
                                                                              'placeholder' => 'Write something!',
