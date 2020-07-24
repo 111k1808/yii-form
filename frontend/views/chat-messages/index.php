@@ -14,18 +14,25 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <main>
     <h1 class="main-title"><?= Html::encode($this->title) ?></h1>
+  <?php if (Yii::$app->session->hasFlash('success')): ?>
+    <?php if (Yii::$app->session->getFlash('success')): ?>
+          <p>Message saved successfully</p>
+    <?php else: ?>
+          <p>The message was not validated</p>
+    <?php endif; ?>
+  <?php endif; ?>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
               <?php $form = ActiveForm::begin(); ?>
 
               <?= $form->field($searchModel, 'user_id',['template' => '{input}',
-                                                                  'inputOptions' =>
-                                                                    ['value'=>1]])->hiddenInput(); ?>
+                'inputOptions' =>
+                  ['value'=>1]])->hiddenInput(); ?>
               <?= $form->field($searchModel, 'comment')->textarea(['id' => 4,
-                                                                             'rows' => 5,
-                                                                             'placeholder' => 'Write something!',
-                                                                             'cols' => 50]) ?>
+                'rows' => 5,
+                'placeholder' => 'Write something!',
+                'cols' => 50]) ?>
 
                 <div class="form-group">
                   <?= Html::submitButton('Send', ['class' => '']) ?>
