@@ -48,9 +48,13 @@ class ChatMessagesSearch extends ChatMessages
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'Pagination' => [
-              'pageSize' =>2,
+              'pageSize' =>10,
             ],
-
+          'sort' => [
+            'defaultOrder' => [
+              'creation_time' => SORT_DESC,
+            ]
+          ],
         ]);
 
         $this->load($params);

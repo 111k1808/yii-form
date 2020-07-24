@@ -37,7 +37,17 @@ class ChatMessagesController extends Controller
     {
         $searchModel = new ChatMessagesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = new ChatMessages();
+        $mod = (Yii::$app->request->post());
 
+        if (!empty($mod)&& $searchModel->validate()) {
+          //echo $searchModel->load(Yii::$app->request->post());
+          $model->user_id = 1;
+          $model->comment = $model['comment'];
+          $model->save();
+        } else {
+          echo $searchModel->load(Yii::$app->request->post());
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
