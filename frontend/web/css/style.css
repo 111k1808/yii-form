@@ -13,6 +13,30 @@ body {
   box-sizing: border-box;
 }
 
+.header nav {
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: column-reverse;
+  margin: auto;
+}
+
+.avatar span {
+  color: gold;
+  font-size: 18px;
+}
+
+nav img {
+  border: 4px solid yellow;
+}
 
 .nav-list {
   display: flex;
@@ -28,6 +52,7 @@ body {
 .logo {
   margin-right: auto;
 }
+
 
 .nav-item>a {
   padding: 20px 35px;

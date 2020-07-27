@@ -11,6 +11,12 @@ use yii\widgets\Pjax;
 
 $this->title = 'Feedback form';
 $this->params['breadcrumbs'][] = $this->title;
+if (Yii::$app->user->isGuest) {
+  $user_id = 1;
+}
+else {
+  $user_id = Yii::$app->user->identity->id;
+}
 ?>
 <main>
     <h1 class="main-title"><?= Html::encode($this->title) ?></h1>
@@ -25,10 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="row">
             <div class="col-md-6">
               <?php $form = ActiveForm::begin(); ?>
-
+              <?= $form->field($searchModel, 'creation_time',['template' => '{input}',
+                'inputOptions' =>
+                  ['value'=>date('Y-m-d H:i:s', time())]])->hiddenInput(); ?>
               <?= $form->field($searchModel, 'user_id',['template' => '{input}',
                 'inputOptions' =>
-                  ['value'=>1]])->hiddenInput(); ?>
+                  ['value'=>$user_id]])->hiddenInput(); ?>
               <?= $form->field($searchModel, 'comment')->textarea(['id' => 4,
                 'rows' => 5,
                 'placeholder' => 'Write something!',
