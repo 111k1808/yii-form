@@ -4,11 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
-use common\widgets\Alert;
 use yii\widgets\Menu;
 
 AppAsset::register($this);
@@ -31,8 +27,26 @@ AppAsset::register($this);
         <?php
         $menuItems[] = ['label' => 'Logo', 'url' => ['chat-messages/index']];
         $menuItems[] = ['label' => 'Acount', 'url' => ['site/signup']];
-        $menuItems[] = ['label' => 'Registration', 'url' => ['site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest];
+        if (Yii::$app->user->isGuest) {
+          $menuItems[] = ['label' => 'Registration', 'url' => ['site/signup']];
+          $menuItems[] = ['label' => 'Login', 'url' => ['site/login']];
+          $url_avatar = "img/guest.jpg";
+          $user_name = 'Cuest';
+        }
+        else {
+          //$menuItems[] =
+           /* echo '<li>'
+            . Html::beginForm(['/site/logout'], 'post')
+            . Html::submitButton(
+              'Logout (' . Yii::$app->user->identity->username . ')',
+              ['class' => 'btn btn-link logout']
+            )
+            . Html::endForm()
+            . '</li>';*/
+          $menuItems[] = ['label' => 'Logout', 'url' => ['site/logout'], 'template' => '<a href="{url}" data-method="post">{label}</a>'];
+          $url_avatar = Yii::$app->user->identity->avatar;
+          $user_name = Yii::$app->user->identity->username;
+        }
         echo Menu::widget([
           'options'=> ['class'=>'nav-list'],
           'activeCssClass' => 'active',
@@ -41,12 +55,10 @@ AppAsset::register($this);
           'items' => $menuItems,
         ]);
         ?>
-       <!-- <ul class="nav-list">
-            <li class="nav-item logo"><a href="" class="nav-link">Logo</a></li>
-            <li class="nav-item"><a href="" class="nav-link">Feedback form</a></li>
-            <li class="nav-item"><a href="" class="nav-link">Registration</a></li>
-            <li class="nav-item" ><a href="" class="nav-link">Login</a></li>
-        </ul>-->
+        <div class="avatar">
+            <span><?php echo $user_name;?></span>
+            <img src="<?= $url_avatar?>" width="50" height="50" alt="avatar">
+        </div>
     </nav>
 </header>
 <?= $content ?>

@@ -16,8 +16,8 @@ use yii\web\IdentityInterface;
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $verification_token
- * @property string $email
  * @property string $auth_key
+ * @property string $avatar
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
@@ -41,14 +41,14 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
       return [
-        [['username', 'auth_key', 'password_hash', 'created_at', 'updated_at'], 'required'],
+        [['username', 'auth_key', 'password_hash'], 'required'],
         [['status', 'created_at', 'updated_at'], 'integer'],
         [['username', 'password_hash', 'password_reset_token', 'verification_token'], 'string', 'max' => 255],
         [['auth_key'], 'string', 'max' => 32],
         [['avatar'], 'string', 'max' => 128],
         [['username'], 'unique'],
         [['password_reset_token'], 'unique'],
-        ['status', 'default', 'value' => self::STATUS_INACTIVE],
+        ['status', 'default', 'value' => self::STATUS_ACTIVE],
         ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
       ];
     }
@@ -107,6 +107,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
+
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
 
