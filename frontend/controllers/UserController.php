@@ -1,13 +1,16 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\controllers;
 
+
+use frontend\models\UploadImage;
 use Yii;
 use common\models\User;
 use app\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -87,13 +90,26 @@ class UserController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['upload']);
         }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->render('update', ['model' => $model ]);
     }
+
+   public function actionUpload()
+    {
+        $model = new UploadImage();
+        if(Yii::$app->request->isPost) {
+
+          //$imageName = time();
+          $model->image = UploadedFile::getInstance($model, 'image');
+          $model->upload();
+          //debug($model);
+          return '';
+        }
+      return $this->render('upload', ['model' => $model]);
+    }
+
 
     /**
      * Deletes an existing User model.

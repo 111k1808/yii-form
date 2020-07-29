@@ -37,14 +37,19 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
+          'enablePrettyUrl' => true,
+          'showScriptName' => false,
+          'enableStrictParsing' => false,
+          'rules' => [
+            'chat-messages' => 'chat-messages/index',
+            'update/<id:\d+>' => 'user/update',
+            'upload' => 'user/upload',
+            'passwordChange' => 'user/passwordChange',
+          ],
         ],
-        */
+
     ],
     'params' => $params,
 ];

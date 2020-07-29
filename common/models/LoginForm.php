@@ -26,8 +26,6 @@ class LoginForm extends Model
             [['username', 'password'], 'required'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
-            //['password', 'validatePassword'],
         ];
     }
 
@@ -55,7 +53,6 @@ class LoginForm extends Model
      */
     public function login()
     {
-     //debug(Yii::$app->user->login($this->getUser()));
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser());
         }

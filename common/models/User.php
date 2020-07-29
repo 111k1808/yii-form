@@ -30,7 +30,9 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_ACTIVE = 10;
 
 
-    /**
+
+
+  /**
      * {@inheritdoc}
      */
     public static function tableName()
@@ -63,6 +65,7 @@ class User extends ActiveRecord implements IdentityInterface
         'username' => 'Username',
         'auth_key' => 'Auth Key',
         'password_hash' => 'Password Hash',
+        //'password' => 'Password',
         'password_reset_token' => 'Password Reset Token',
         'avatar' => 'Avatar',
         'status' => 'Status',
@@ -138,7 +141,7 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findByVerificationToken($token) {
         return static::findOne([
             'verification_token' => $token,
-            'status' => self::STATUS_INACTIVE
+            'status' => self::STATUS_ACTIVE
         ]);
     }
 
