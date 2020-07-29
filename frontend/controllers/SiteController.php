@@ -4,6 +4,7 @@ namespace frontend\controllers;
 use app\models\ChatMessages;
 use common\models\User;
 use frontend\models\ResendVerificationEmailForm;
+use frontend\models\UploadForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
@@ -16,6 +17,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\web\UploadedFile;
 
 /**
  * Site controller
@@ -266,4 +268,5 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
+
 }

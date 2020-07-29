@@ -5,6 +5,7 @@
 
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
+use yii\helpers\Url;
 use yii\widgets\Menu;
 
 AppAsset::register($this);
@@ -26,23 +27,15 @@ AppAsset::register($this);
     <nav>
         <?php
         $menuItems[] = ['label' => 'Logo', 'url' => ['chat-messages/index']];
-        $menuItems[] = ['label' => 'Acount', 'url' => ['site/signup']];
         if (Yii::$app->user->isGuest) {
           $menuItems[] = ['label' => 'Registration', 'url' => ['site/signup']];
           $menuItems[] = ['label' => 'Login', 'url' => ['site/login']];
-          $url_avatar = "img/guest.jpg";
+          $url_avatar = "/img/guest.jpg";
           $user_name = 'Cuest';
         }
         else {
-          //$menuItems[] =
-           /* echo '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-              'Logout (' . Yii::$app->user->identity->username . ')',
-              ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';*/
+          $menuItems[] = ['label' => 'Acount', 'url' => ['profile/index']];
+          $menuItems[] = ['label' => 'AcountViev', 'url' => [Url::to(['user/update', 'id' => Yii::$app->user->identity->id])]];
           $menuItems[] = ['label' => 'Logout', 'url' => ['site/logout'], 'template' => '<a href="{url}" data-method="post">{label}</a>'];
           $url_avatar = Yii::$app->user->identity->avatar;
           $user_name = Yii::$app->user->identity->username;
