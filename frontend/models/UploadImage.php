@@ -4,6 +4,8 @@
 namespace frontend\models;
 
 
+use common\models\User;
+use Yii;
 use yii\base\Model;
 
 class UploadImage extends Model
@@ -18,7 +20,27 @@ class UploadImage extends Model
 
   public function upload(){
     if($this->validate()){
-      $this->image->saveAs("img/{$this->image->baseName}.{$this->image->extension}");
+      $fName = "img/upload_".time().".".$this->image->extension;
+      $this->image->saveAs($fName);
+      debug($this->image);
+      $userId = Yii::$app->user->identity->id;
+
+      $str = Yii::$app->user->identity->avatar;
+      if($str!=='/img/new-user.png'){
+        if($str[0]=='/'){
+          $delStr=ltrim($str, '/');
+        }
+        //вернуть unlink($delStr);
+      }
+
+
+      $user = User::find()->where(['id'=>$userId])->all();
+      //$user->avatar= 32167;
+      debug($user);
+      //$user->Update();
+
+
+
     }else{
       return false;
     }

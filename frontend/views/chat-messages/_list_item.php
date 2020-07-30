@@ -1,17 +1,23 @@
 <?php
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
+
+use app\models\ChatMessages;
+
 if (Yii::$app->user->isGuest) {
-  $user_avatar = 'img/guest.jpg';
+  $msg = ChatMessages::find()->one();
+
 }
 else {
-  $user_avatar = $model['user']->avatar;
+  $msg = ChatMessages::find()->where(['user_id'=>Yii::$app->user->identity->id])->one();
 }
 ?>
 <div class="row">
   <div class="col-md-12">
     <div class="row">
       <div class="col-6">
-        <img src="<?= $user_avatar?>" alt="avatar" width="50" height="50">
+          <?=''?>
+        <img src="<?= 'img/'.$msg->user->getAva()?>" alt="avatar" width="50" height="50">
         <p><?= $model['creation_time']?></p>
       </div>
       <div class="col-6">

@@ -105,7 +105,7 @@ class UserController extends Controller
           $model->image = UploadedFile::getInstance($model, 'image');
           $model->upload();
           //debug($model);
-          return '';
+          return $this->render('upload', ['model' => $model]);
         }
       return $this->render('upload', ['model' => $model]);
     }
@@ -140,4 +140,5 @@ class UserController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = 'Update';
             <div class="row">
                 <div class="col-md-6">
                     <div class="col-sm">
-                        <img class="avatar" src="/<?=$model->avatar?>" width="156" height="156" alt="avatar">
+                        <img class="avatar" src="<?=$model->avatar?>" width="156" height="156" alt="avatar">
                     </div>
                     <div class="col-sm">
                       <?= Html::a("Change avatar", ['upload'], ['style' => ['text-decoration' => 'none',

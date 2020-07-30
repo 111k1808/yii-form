@@ -8,6 +8,7 @@ use yii\widgets\ActiveForm;
 <main>
   <?php if($model->image): ?>
       <img src="/img/<?= $model->image?>" alt="">
+        <?=$model->image->name;?>
   <?php endif; ?>
     <?php $form = ActiveForm::begin() ?>
     <?= $form->field($model, 'image')->fileInput() ?>

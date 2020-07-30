@@ -6,6 +6,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\Url;
 use yii\web\IdentityInterface;
 
 /**
@@ -248,4 +249,23 @@ class User extends ActiveRecord implements IdentityInterface
   {
     return $this->hasMany(ChatMessages::class, ['user_id' => 'id']);
   }
+
+  public function getAva()
+  {
+    if(!Yii::$app->user->isGuest)
+    {
+      $urlFile = "../web/img/ava/ava".Yii::$app->user->identity->getId();
+      if( is_file($urlFile.".jpg") ){
+        return "ava/ava".Yii::$app->user->identity->getId().".jpg";
+      } elseif (is_file($urlFile.".png")) {
+        return "ava/ava".Yii::$app->user->identity->getId().".png";
+      } else {
+        return 'new-user.png';
+      }
+    }
+    return "guest.jpg";
+
+
+  }
+
 }

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+
 use Yii;
 use app\models\ChatMessages;
 use app\models\ChatMessagesSearch;
@@ -35,8 +36,10 @@ class ChatMessagesController extends Controller
    */
   public function actionIndex()
   {
+
     $searchModel = new ChatMessagesSearch();
     $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    $flag_homepage = 111111;
 
     if ($searchModel->load(Yii::$app->request->post())&&(!empty(Yii::$app->request->post()))) {
       if ($searchModel->save()) {
@@ -57,6 +60,7 @@ class ChatMessagesController extends Controller
     return $this->render('index', [
       'searchModel' => $searchModel,
       'dataProvider' => $dataProvider,
+      'flag_homepage' => $flag_homepage
     ]);
   }
 
@@ -100,6 +104,7 @@ class ChatMessagesController extends Controller
    */
   public function actionUpdate($id)
   {
+
     $model = $this->findModel($id);
 
     if ($model->load(Yii::$app->request->post()) && $model->save()) {
