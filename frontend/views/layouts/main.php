@@ -4,7 +4,7 @@
 /* @var $content string */
 
 
-use app\models\ChatMessages;
+use common\models\User;
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
@@ -30,14 +30,14 @@ AppAsset::register($this);
         <?php
         $menuItems[] = ['label' => 'Logo', 'url' => ['chat-messages/index']];
         if (Yii::$app->user->isGuest) {
-          $msg = ChatMessages::find()->one();
+          $user = User::find()->one();
           $menuItems[] = ['label' => 'Registration', 'url' => ['site/signup']];
           $menuItems[] = ['label' => 'Login', 'url' => ['site/login']];
           $user_name = 'Cuest';
         }
         else {
 
-          $msg = ChatMessages::find()->where(['user_id'=>Yii::$app->user->identity->id])->one();
+          $user = User::find()->where(['id'=>Yii::$app->user->id])->one();
           $menuItems[] = ['label' => 'Acount', 'url' => ['profile/index']];
           $menuItems[] = ['label' => 'AcountViev', 'url' => [Url::to(['user/update', 'id' => Yii::$app->user->identity->id])]];
           $menuItems[] = ['label' => 'Logout', 'url' => ['site/logout'], 'template' => '<a href="{url}" data-method="post">{label}</a>'];
@@ -53,15 +53,16 @@ AppAsset::register($this);
           'items' => $menuItems,
         ]);
         ?>
+
         <div class="avatar">
             <span><?php echo $user_name;?></span>
-            <?php if(empty($msg)){$urlAva = 'img/new-user.png';} else{ $urlAva =  'img/'.$msg->ava;}?>
+            <?php if(empty($user)){$urlAva = 'img/new-user.png';} else{ $urlAva =  'img/'.$user->ava;}?>
 
             <img src="<?php if((Yii::$app->controller->id == 'chat-messages') and (Yii::$app->controller->action->id == 'index'))  {
               echo $urlAva;
             }else{ echo '/'.$urlAva;}?>" width="50" height="50" alt="avatar">
         </div>
-    </nav>
+     </nav>
 </header>
 <?= $content ?>
 <footer class="footer">

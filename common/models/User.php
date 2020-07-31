@@ -257,7 +257,6 @@ class User extends ActiveRecord implements IdentityInterface
   public function getAva()
   {
       $urlFile = "../../frontend/web/img/ava/ava".$this->id;
-
       if( is_file($urlFile.".jpg") ){
         return "ava/ava".$this->id.".jpg";
       } elseif (is_file($urlFile.".png")) {
