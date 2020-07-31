@@ -4,6 +4,8 @@
 namespace frontend\models;
 
 
+use common\models\User;
+use Yii;
 use yii\base\Model;
 
 class UploadImage extends Model
@@ -18,9 +20,10 @@ class UploadImage extends Model
 
   public function upload(){
     if($this->validate()){
-      $this->image->saveAs("img/{$this->image->baseName}.{$this->image->extension}");
+      $this->image->saveAs("img/ava/ava".Yii::$app->user->id.".".$this->image->extension);
     }else{
       return false;
     }
   }
+
 }

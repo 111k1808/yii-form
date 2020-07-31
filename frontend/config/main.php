@@ -45,8 +45,10 @@ return [
           'rules' => [
             'chat-messages' => 'chat-messages/index',
             'update/<id:\d+>' => 'user/update',
+            'password-change' => 'user/password-change',
             'upload' => 'user/upload',
-            'passwordChange' => 'user/passwordChange',
+
+
           ],
         ],
 

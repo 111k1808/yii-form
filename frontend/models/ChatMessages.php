@@ -3,8 +3,9 @@
 namespace app\models;
 
 use common\models\User;
-use frontend\models\Users;
 use Yii;
+use yii\db\ActiveRecord;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "chat_messages".
@@ -14,7 +15,7 @@ use Yii;
  * @property string|null $comment
  * @property string $creation_time
  */
-class ChatMessages extends \yii\db\ActiveRecord
+class ChatMessages extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -50,15 +51,23 @@ class ChatMessages extends \yii\db\ActiveRecord
         ];
     }
 
-  /**
-   * Gets query for [[user]].
-   *
-   * @return \yii\db\ActiveQuery
-   */
-  public function getUser()
-  {
-    return $this->hasOne(User::class, ['id' => 'user_id']);
-  }
+    /**
+     * Gets query for [[user]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+      return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
 
+    public function getAva()
+    {
+
+      if($this->user_id!==null){
+        return $this->user->ava;
+      }
+      return 'guest.jpg';
+    }
 
 }

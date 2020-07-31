@@ -19,26 +19,29 @@ $this->params['breadcrumbs'][] = 'Update';
             <div class="row">
                 <div class="col-md-6">
                     <div class="col-sm">
-                        <img class="avatar" src="/<?=$model->avatar?>" width="156" height="156" alt="avatar">
-                    </div>
-                    <div class="col-sm">
-                      <?= Html::a("Change avatar", ['upload'], ['style' => ['text-decoration' => 'none',
-                                                                                    'background-color' => 'lawngreen',
-                                                                                    'color'=> 'deeppink',
-                                                                                    'padding'=> '10px 25px',
-                                                                                    'margin'=> '10px',
-                                                                                    'display'=> 'block',
-                                                                                    'width'=> '150px',
-                                                                                    'border-radius'=>'5px']]); ?>
+                        <img class="avatar" src="<?='/img/'.$model->ava?>" width="156" height="156" alt="avatar">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
-                    <?= $form->field($model, 'avatar')->textInput() ?>
 
-                    <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
 
-                    <?= $form->field($model, 'updated_at')->textInput() ?>
+                    <?= Html::a("Change avatar", ['upload'], ['style' => ['text-decoration' => 'none',
+                      'background-color' => 'lawngreen',
+                      'color'=> 'deeppink',
+                      'padding'=> '10px 25px',
+                      'margin'=> '10px',
+                      'display'=> 'block',
+                      'width'=> '150px',
+                      'border-radius'=>'5px']]); ?>
+                    <?= Html::a("Change password", ['password-change'], ['style' => ['text-decoration' => 'none',
+                      'background-color' => 'lawngreen',
+                      'color'=> 'deeppink',
+                      'padding'=> '10px 25px',
+                      'margin'=> '10px',
+                      'display'=> 'block',
+                      'width'=> '150px',
+                      'border-radius'=>'5px']]); ?>
                     <?php // Html::a("passwordChange", ['user/passwordChange']); ?>
 
                 </div>

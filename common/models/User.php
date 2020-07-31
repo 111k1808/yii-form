@@ -6,6 +6,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 
 /**
@@ -17,7 +18,6 @@ use yii\web\IdentityInterface;
  * @property string $password_reset_token
  * @property string $verification_token
  * @property string $auth_key
- * @property string $avatar
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
@@ -28,6 +28,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
+    const SCENARIO_PROFILE = 'profile';
 
 
 
@@ -47,7 +48,6 @@ class User extends ActiveRecord implements IdentityInterface
         [['status', 'created_at', 'updated_at'], 'integer'],
         [['username', 'password_hash', 'password_reset_token', 'verification_token'], 'string', 'max' => 255],
         [['auth_key'], 'string', 'max' => 32],
-        [['avatar'], 'string', 'max' => 128],
         [['username'], 'unique'],
         [['password_reset_token'], 'unique'],
         ['status', 'default', 'value' => self::STATUS_ACTIVE],
@@ -65,9 +65,7 @@ class User extends ActiveRecord implements IdentityInterface
         'username' => 'Username',
         'auth_key' => 'Auth Key',
         'password_hash' => 'Password Hash',
-        //'password' => 'Password',
         'password_reset_token' => 'Password Reset Token',
-        'avatar' => 'Avatar',
         'status' => 'Status',
         'created_at' => 'Created At',
         'updated_at' => 'Updated At',
@@ -83,6 +81,13 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             TimestampBehavior::className(),
         ];
+    }
+
+    public function scenarios()
+    {
+      return ArrayHelper::merge(parent::scenarios(), [
+        self::SCENARIO_PROFILE => ['username'],
+      ]);
     }
 
 
@@ -247,5 +252,18 @@ class User extends ActiveRecord implements IdentityInterface
   public function getChatMessages()
   {
     return $this->hasMany(ChatMessages::class, ['user_id' => 'id']);
+  }
+
+  public function getAva()
+  {
+      $urlFile = "../../frontend/web/img/ava/ava".$this->id;
+
+      if( is_file($urlFile.".jpg") ){
+        return "ava/ava".$this->id.".jpg";
+      } elseif (is_file($urlFile.".png")) {
+        return "ava/ava".$this->id.".png";
+      } else {
+        return 'new-user.png';
+      }
   }
 }

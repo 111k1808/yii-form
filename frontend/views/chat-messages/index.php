@@ -11,10 +11,7 @@ use yii\widgets\Pjax;
 
 $this->title = 'Feedback form';
 $this->params['breadcrumbs'][] = $this->title;
-if (Yii::$app->user->isGuest) {
-  $user_id = 0;
-}
-else {
+if (!Yii::$app->user->isGuest) {
   $user_id = Yii::$app->user->identity->id;
 }
 ?>
@@ -31,7 +28,7 @@ else {
         <div class="row">
             <div class="col-md-6">
               <?php $form = ActiveForm::begin(); ?>
-              <?php //$form->field($searchModel, 'creation_time',['template' => '{input}',             'inputOptions' =>['value'=>date('Y-m-d H:i:s', time())]])->hiddenInput(); ?>
+
               <?= $form->field($searchModel, 'user_id',['template' => '{input}',
                 'inputOptions' =>
                   ['value'=>$user_id]])->hiddenInput(); ?>
