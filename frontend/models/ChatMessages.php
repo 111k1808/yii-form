@@ -51,14 +51,23 @@ class ChatMessages extends ActiveRecord
         ];
     }
 
-  /**
-   * Gets query for [[user]].
-   *
-   * @return \yii\db\ActiveQuery
-   */
-  public function getUser()
-  {
-    return $this->hasOne(User::class, ['id' => 'user_id']);
-  }
+    /**
+     * Gets query for [[user]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+      return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+    public function getAva()
+    {
+
+      if($this->user_id!==null){
+        return $this->user->ava;
+      }
+      return 'guest.jpg';
+    }
 
 }

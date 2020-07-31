@@ -11,10 +11,7 @@ use yii\widgets\Pjax;
 
 $this->title = 'Feedback form';
 $this->params['breadcrumbs'][] = $this->title;
-if (Yii::$app->user->isGuest) {
-  $user_id = 1;
-}
-else {
+if (!Yii::$app->user->isGuest) {
   $user_id = Yii::$app->user->identity->id;
 }
 ?>

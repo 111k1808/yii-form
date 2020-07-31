@@ -60,7 +60,7 @@ class ChatMessagesController extends Controller
     return $this->render('index', [
       'searchModel' => $searchModel,
       'dataProvider' => $dataProvider,
-      'flag_homepage' => $flag_homepage
+      //'flag_homepage' => $flag_homepage
     ]);
   }
 
