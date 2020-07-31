@@ -16,7 +16,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'avatar')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'updated_at')->textInput() ?>
 

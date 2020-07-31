@@ -6,6 +6,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 
 /**
@@ -27,6 +28,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
+    const SCENARIO_PROFILE = 'profile';
 
 
 
@@ -79,6 +81,13 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             TimestampBehavior::className(),
         ];
+    }
+
+    public function scenarios()
+    {
+      return ArrayHelper::merge(parent::scenarios(), [
+        self::SCENARIO_PROFILE => ['username'],
+      ]);
     }
 
 

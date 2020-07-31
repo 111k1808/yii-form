@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 
+use frontend\models\PasswordChangeForm;
 use frontend\models\UploadImage;
 use Yii;
 use common\models\User;
@@ -101,10 +102,8 @@ class UserController extends Controller
         $model = new UploadImage();
         if(Yii::$app->request->isPost) {
 
-          //$imageName = time();
           $model->image = UploadedFile::getInstance($model, 'image');
           $model->upload();
-          //debug($model);
           return $this->render('upload', ['model' => $model]);
         }
       return $this->render('upload', ['model' => $model]);
@@ -123,6 +122,19 @@ class UserController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionPasswordChange()
+    {
+      $user = $this->findModel(Yii::$app->user->id);
+      $model = new PasswordChangeForm($user);
+      if ($model->load(Yii::$app->request->post()) && $model->changePassword()) {
+        return $this->redirect(['index']);
+      } else {
+        return $this->render('password-change', [
+          'model' => $model,
+        ]);
+      }
     }
 
     /**

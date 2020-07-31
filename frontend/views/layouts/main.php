@@ -29,11 +29,8 @@ AppAsset::register($this);
     <nav>
         <?php
         $menuItems[] = ['label' => 'Logo', 'url' => ['chat-messages/index']];
-       //ужно позже поределить главную страницу
-        //echo $flag_homepage;
         if (Yii::$app->user->isGuest) {
           $msg = ChatMessages::find()->one();
-          //if(empty($msg)){echo 'img/guest.jpg';} else{ echo 'img/'.$msg->ava;}
           $menuItems[] = ['label' => 'Registration', 'url' => ['site/signup']];
           $menuItems[] = ['label' => 'Login', 'url' => ['site/login']];
           $user_name = 'Cuest';
@@ -56,14 +53,13 @@ AppAsset::register($this);
           'items' => $menuItems,
         ]);
         ?>
-      <?php
-      $us= \common\models\User::find()->where(['id'=>Yii::$app->user->id])->one();
-      echo $us->ava;
-      //debug($msg);?>
         <div class="avatar">
             <span><?php echo $user_name;?></span>
+            <?php if(empty($msg)){$urlAva = 'img/new-user.png';} else{ $urlAva =  'img/'.$msg->ava;}?>
 
-            <img src="<?if(empty($msg)){echo 'img/new-user.png';} else{ echo 'img/'.$msg->ava;}?>" width="50" height="50" alt="avatar">
+            <img src="<?php if((Yii::$app->controller->id == 'chat-messages') and (Yii::$app->controller->action->id == 'index'))  {
+              echo $urlAva;
+            }else{ echo '/'.$urlAva;}?>" width="50" height="50" alt="avatar">
         </div>
     </nav>
 </header>

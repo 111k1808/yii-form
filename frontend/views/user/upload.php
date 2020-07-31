@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'image')->fileInput() ?>
     <button>Загрузить</button>
     <?php ActiveForm::end() ?>
-  <?= Html::a("Profile", ['update', 'id' => Yii::$app->user->identity->id], ['style' => ['text-decoration' => 'none',
+  <?= Html::a("Profile", ['update', 'id' => Yii::$app->user->id], ['style' => ['text-decoration' => 'none',
     'background-color' => 'lawngreen',
     'color'=> 'deeppink',
     'padding'=> '10px 25px',

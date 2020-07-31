@@ -20,29 +20,10 @@ class UploadImage extends Model
 
   public function upload(){
     if($this->validate()){
-      $fName = "img/upload_".time().".".$this->image->extension;
-      $this->image->saveAs($fName);
-      debug($this->image);
-      $userId = Yii::$app->user->identity->id;
-
-      $str = Yii::$app->user->identity->avatar;
-      if($str!=='/img/new-user.png'){
-        if($str[0]=='/'){
-          $delStr=ltrim($str, '/');
-        }
-        //вернуть unlink($delStr);
-      }
-
-
-      $user = User::find()->where(['id'=>$userId])->all();
-      //$user->avatar= 32167;
-      debug($user);
-      //$user->Update();
-
-
-
+      $this->image->saveAs("img/ava/ava".Yii::$app->user->id.".".$this->image->extension);
     }else{
       return false;
     }
   }
+
 }
