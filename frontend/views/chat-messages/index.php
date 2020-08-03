@@ -27,6 +27,7 @@ if (!Yii::$app->user->isGuest) {
     <div class="container">
         <div class="row">
             <div class="col-md-6">
+              <?php Pjax::begin(); ?>
               <?php $form = ActiveForm::begin(); ?>
 
               <?= $form->field($searchModel, 'user_id',['template' => '{input}',
@@ -42,6 +43,7 @@ if (!Yii::$app->user->isGuest) {
                 </div>
 
               <?php ActiveForm::end(); ?>
+              <?php Pjax::end(); ?>
             </div>
             <div class="col-md-6">
               <?php Pjax::begin(); ?>

@@ -39,7 +39,6 @@ class ChatMessagesController extends Controller
 
     $searchModel = new ChatMessagesSearch();
     $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-    $flag_homepage = 111111;
 
     if ($searchModel->load(Yii::$app->request->post())&&(!empty(Yii::$app->request->post()))) {
       if ($searchModel->save()) {
