@@ -40,7 +40,7 @@ class ChatMessagesSearch extends ChatMessages
    */
   public function search($params)
   {
-    $query = ChatMessages::find()
+    $query = ChatMessages::find()->where(['disable'=>0])
       ->joinWith('user');
 
     // add conditions that should always apply here

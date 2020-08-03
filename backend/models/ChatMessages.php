@@ -10,6 +10,7 @@ use Yii;
  *
  * @property int $id
  * @property int|null $user_id
+ * @property int|null $disable
  * @property string|null $comment
  * @property string|null $creation_time
  */
@@ -23,16 +24,14 @@ class ChatMessages extends \yii\db\ActiveRecord
         return 'chat_messages';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
-        return [
-            [['user_id'], 'integer'],
-            [['comment'], 'string'],
-            [['creation_time'], 'safe'],
-        ];
+      return [
+        [['user_id'], 'required'],
+        [['user_id'], 'integer'],
+        [['comment'], 'string'],
+        [['creation_time'], 'safe'],
+      ];
     }
 
     /**
@@ -40,30 +39,30 @@ class ChatMessages extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'comment' => 'Comment',
-            'creation_time' => 'Creation Time',
-        ];
+      return [
+        'id' => 'ID',
+        'user_id' => 'User ID',
+        'comment' => 'Review',
+        'creation_time' => 'Creation Time',
+      ];
     }
 
-  /**
-   * Gets query for [[user]].
-   *
-   * @return \yii\db\ActiveQuery
-   */
-  public function getUser()
-  {
-    return $this->hasOne(User::class, ['id' => 'user_id']);
-  }
-
-  public function getAva()
-  {
-
-    if($this->user_id!==null){
-      return $this->user->ava;
+    /**
+     * Gets query for [[user]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+      return $this->hasOne(User::class, ['id' => 'user_id']);
     }
-    return 'guest.jpg';
-  }
+
+    public function getAva()
+    {
+
+      if($this->user_id!==null){
+        return $this->user->ava;
+      }
+      return 'guest.jpg';
+    }
 }

@@ -14,6 +14,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'user_id')->textInput() ?>
 
+    <?= $form->field($model, 'disable')->textInput() ?>
+
     <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'creation_time')->textInput() ?>

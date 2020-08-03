@@ -26,8 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+
             'id',
             'user_id',
+            ['attribute'=>'disable', 'filter' =>['enable','disable'],'value'=>function($model)
+            {if($model->disable==0){$disable = 'enable';}else {
+              $disable = 'disable';
+            } return $disable;}],
             'comment:ntext',
             'creation_time',
 
