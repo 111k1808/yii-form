@@ -6,8 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/common/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/frontend/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/backend/tests" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/andrewdanilov/yii2-admin-panel" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/andrewdanilov/yii2-grid-tools" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/almasaeed2010/adminlte" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/behat/gherkin" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/bower-asset/bootstrap" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/bower-asset/inputmask" />
@@ -15,6 +14,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/bower-asset/punycode" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/bower-asset/yii2-pjax" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/cebe/markdown" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/cebe/yii2-gravatar" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/codeception/codeception" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/codeception/lib-asserts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/codeception/lib-innerbrowser" />
@@ -25,6 +25,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/codeception/stub" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/codeception/verify" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dmstr/yii2-adminlte-asset" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/instantiator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/lexer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/egulias/email-validator" />

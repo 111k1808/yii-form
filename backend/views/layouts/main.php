@@ -1,69 +1,65 @@
 <?php
-
 use yii\helpers\Html;
-use andrewdanilov\adminpanel\AdminPanelAsset;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-AdminPanelAsset::register($this);
 
-if (isset(Yii::$app->params['siteName'])) {
-	$siteName = Yii::$app->params['siteName'];
+if (Yii::$app->controller->action->id === 'login') { 
+/**
+ * Do not use this code in your template. Remove it. 
+ * Instead, use the code  $this->layout = '//main-login'; in your controller.
+ */
+    echo $this->render(
+        'main-login',
+        ['content' => $content]
+    );
 } else {
-	$siteName = 'AdminPanel';
-}
-if (isset(Yii::$app->user->identity['username'])) {
-	$userName = Yii::$app->user->identity['username'];
-} else {
-	$userName = 'Guest';
-}
-$directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/andrewdanilov/yii2-admin-panel/src');
-?>
-<?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
-</head>
-<body>
-<?php $this->beginBody() ?>
 
-<div class="page-wrapper">
+    if (class_exists('backend\assets\AppAsset')) {
+        backend\assets\AppAsset::register($this);
+    } else {
+        app\assets\AppAsset::register($this);
+    }
 
-	<?= $this->render(
-		'_blocks/left',
-		['directoryAsset' => $directoryAsset, 'siteName' => $siteName]
-	) ?>
+    dmstr\web\AdminLteAsset::register($this);
 
-	<div class="page-main">
+    $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
+    ?>
+    <?php $this->beginPage() ?>
+    <!DOCTYPE html>
+    <html lang="<?= Yii::$app->language ?>">
+    <head>
+        <meta charset="<?= Yii::$app->charset ?>"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <?= Html::csrfMetaTags() ?>
+        <title><?= Html::encode($this->title) ?></title>
+        <?php $this->head() ?>
+    </head>
+    <body class="hold-transition skin-blue sidebar-mini">
+    <?php $this->beginBody() ?>
+    <div class="wrapper">
 
-		<?= $this->render(
-			'_blocks/top',
-			['directoryAsset' => $directoryAsset, 'userName' => $userName]
-		) ?>
+        <?= $this->render(
+            'header.php',
+            ['directoryAsset' => $directoryAsset]
+        ) ?>
 
-		<?= $this->render(
-			'_blocks/content',
-			['directoryAsset' => $directoryAsset, 'content' => $content]
-		) ?>
+        <?= $this->render(
+            'left.php',
+            ['directoryAsset' => $directoryAsset]
+        )
+        ?>
 
-		<?= $this->render(
-			'_blocks/footer',
-			['directoryAsset' => $directoryAsset]
-		) ?>
+        <?= $this->render(
+            'content.php',
+            ['content' => $content, 'directoryAsset' => $directoryAsset]
+        ) ?>
 
-	</div>
+    </div>
 
-</div>
-
-<?php $this->endBody() ?>
-</body>
-</html>
-<?php $this->endPage() ?>
-
+    <?php $this->endBody() ?>
+    </body>
+    </html>
+    <?php $this->endPage() ?>
+<?php } ?>
