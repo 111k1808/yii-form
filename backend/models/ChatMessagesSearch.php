@@ -17,7 +17,7 @@ class ChatMessagesSearch extends ChatMessages
     public function rules()
     {
         return [
-            [['id', 'user_id'], 'integer'],
+            [['id', 'user_id', 'disable'], 'integer'],
             [['comment', 'creation_time'], 'safe'],
         ];
     }
@@ -40,7 +40,7 @@ class ChatMessagesSearch extends ChatMessages
      */
     public function search($params)
     {
-        $query = ChatMessages::find()->joinWith('user');
+        $query = ChatMessages::find();
 
         // add conditions that should always apply here
 
@@ -60,6 +60,7 @@ class ChatMessagesSearch extends ChatMessages
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
+            'disable' => $this->disable,
             'creation_time' => $this->creation_time,
         ]);
 

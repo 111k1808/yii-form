@@ -15,6 +15,7 @@ class m200721_132521_create_chat_messages_table extends Migration
         $this->createTable('{{%chat_messages}}', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer(),
+            'disable' => $this->tinyInteger()->defaultValue(0),
             'comment' => $this->text(),
             'creation_time' => $this->timestamp()->null()->defaultExpression('CURRENT_TIMESTAMP'),
         ]);
